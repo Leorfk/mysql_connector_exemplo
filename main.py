@@ -17,14 +17,20 @@ db_service.commit_changes()
 print('durma')
 sleep(2)
 for c in range(2):
-
-    for c in range(1000):
-        id_role = randint(1,99999999)
-        print(id_role)
-        user_role_repo.insert_new_user_role((id_role, str(uuid4())))
-        db_service.commit_changes()
-        usuario_repo.insert_new_usuario((id_role, 'xap@xap', 'toma', id_role))
-        db_service.commit_changes()
+    if not db_service.conn.is_connected():
+        db_service.get_connection()
+    try:
+        for c in range(100):
+            id_role = randint(1,99999999)
+            print(id_role)
+            user_role_repo.insert_new_user_role((id_role, str(uuid4())))
+            db_service.commit_changes()
+            usuario_repo.insert_new_usuario((id_role, 'xap@xap', 'toma', id_role))
+            db_service.commit_changes()
+    except Exception as ex:
+        print(f'deu ruim {ex}')
+    finally:
+        db_service.close_connection()
 
 
 

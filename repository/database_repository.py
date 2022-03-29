@@ -21,4 +21,9 @@ class DatabaseRepository:
         self.conn.commit()
     
     def get_connection(self):
-        return self.db_connection.create_connection()
+        self.conn = self.db_connection.create_connection()
+    
+    def close_connection(self):
+        if self.conn.is_connected():
+            self.conn.close()
+            print('fechou')
