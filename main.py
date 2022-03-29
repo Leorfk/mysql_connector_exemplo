@@ -24,19 +24,21 @@ def abafa_v1(poll_size, batch_size):
         try:
             for c in range(batch_size):
                 # TODO: testar com consulta
-                # TODO: testar com delete
                 id_role = randint(1, 99999999)
                 print(id_role)
+                # usuario_repo.delete_all_usuario()
+                # user_role_repo.delete_all_user_role()
                 user_role_repo.insert_new_user_role((id_role, str(uuid4())))
                 usuario_repo.insert_new_usuario(
                     (id_role, 'xap@xap', 'toma', id_role))
                 # raise Exception('mamou')
-                db_service.commit_changes()
+            db_service.commit_changes()
+            db_service.close_connection()
         except Exception as ex:
             print(f'deu ruim {ex}')
             db_service.rollback()
-        finally:
-            db_service.close_connection()
+    # finally:
+    #     db_service.close_connection()
 
 
-abafa_v1(1, 1)
+abafa_v1(2, 10)
