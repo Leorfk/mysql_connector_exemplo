@@ -23,6 +23,8 @@ def abafa_v1(poll_size, batch_size):
             db_service.get_connection()
         try:
             for c in range(batch_size):
+                # TODO: testar com consulta
+                # TODO: testar com delete
                 id_role = randint(1, 99999999)
                 print(id_role)
                 user_role_repo.insert_new_user_role((id_role, str(uuid4())))
