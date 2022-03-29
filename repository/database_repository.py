@@ -27,3 +27,6 @@ class DatabaseRepository:
         if self.conn.is_connected():
             self.conn.close()
             print('fechou')
+    
+    def rollback(self):
+        self.conn.rollback()
